@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Đăng ký mua đồng phục HUST - Premium</title>
     
+    <!-- CSS Framework & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Cấu hình Tailwind Theme -->
     <script>
         tailwind.config = {
             theme: {
@@ -34,11 +37,11 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        /* Ẩn thanh cuộn nhưng vẫn cho phép cuộn */
+        /* Tiện ích ẩn thanh cuộn */
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Glassmorphism */
+        /* Hiệu ứng kính (Glassmorphism) */
         .glass-panel {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
@@ -46,7 +49,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.8);
         }
 
-        /* Animations */
+        /* UI Animations */
         @keyframes fadeSlideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -60,7 +63,7 @@
         }
         .animate-float { animation: float 4s ease-in-out infinite; }
 
-        /* Nút Ripple */
+        /* Hiệu ứng gợn sóng khi click (Ripple) */
         .btn-ripple { position: relative; overflow: hidden; transform: translate3d(0, 0, 0); }
         .ripple-span {
             position: absolute;
@@ -74,7 +77,7 @@
             to { transform: scale(4); opacity: 0; }
         }
 
-        /* Loading Spinner */
+        /* Loader khi đang submit */
         .loader {
             border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50%;
@@ -85,74 +88,86 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Thẻ 3D Tilt */
+        /* Thẻ sản phẩm nổi 3D */
         .tilt-card { transition: box-shadow 0.3s ease, transform 0.1s ease; transform-style: preserve-3d; }
         .tilt-card:hover { z-index: 10; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); }
-        .tilt-content { transform: translateZ(30px); } /* Nâng content lên cho 3D depth */
+        .tilt-content { transform: translateZ(30px); } 
     </style>
 </head>
 <body class="text-slate-800 antialiased selection:bg-red-200 selection:text-red-900">
 
-<!-- Confetti Canvas -->
+<!-- ========================================== -->
+<!-- PHẦN 1: GLOBAL COMPONENTS (Hiệu ứng toàn cục) -->
+<!-- ========================================== -->
 <canvas id="confetti-canvas" class="fixed inset-0 z-[100] pointer-events-none hidden"></canvas>
 
 <div class="max-w-md mx-auto bg-slate-50 min-h-screen shadow-2xl relative pb-28 overflow-x-hidden" id="app-container">
     
-    <div class="relative w-full h-56 overflow-hidden rounded-b-[2.5rem] shadow-lg z-10 bg-black">
-        <!-- THAY LINK ẢNH BANNER VÀO src DƯỚI ĐÂY -->
-        <img id="parallax-banner" src="https://placehold.co/800x600/7f1d1d/ffffff?text=HUST+UNIFORM" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-80 scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6">
-            <span id="greeting" class="text-red-200 text-sm font-medium tracking-widest uppercase mb-1 drop-shadow-md"></span>
-            <h1 class="text-white text-3xl font-extrabold tracking-tight drop-shadow-lg leading-tight">Đồng Phục HUST<br><span class="text-red-400">Chính hãng</span></h1>
-        </div>
-    </div>
-
-    <!-- Info Section -->
-    <div class="px-5 -mt-6 relative z-20">
-        <div class="bg-white p-4 rounded-2xl shadow-soft border border-slate-100 flex items-start gap-4">
-            <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 animate-float">
-                <i class="fas fa-headset text-hust-red text-xl"></i>
-            </div>
-            <div>
-                <p class="text-sm text-slate-600 leading-relaxed">Sản phẩm từ xưởng may riêng 100% chất lượng. Hỗ trợ đơn hàng liên hệ:</p>
-                <p class="font-bold text-slate-800 mt-1"><i class="fas fa-user-circle text-hust-red mr-1"></i> Lợi Lê (Lớp trưởng IT-E6-02)</p>
+    <!-- ========================================== -->
+    <!-- PHẦN 2: TRANG 1 - CỬA HÀNG (SHOP VIEW) -->
+    <!-- ========================================== -->
+    <div id="step-1" class="page-section transition-all duration-500">
+        <!-- Banner -->
+        <div class="relative w-full h-56 overflow-hidden rounded-b-[2.5rem] shadow-lg z-10 bg-black">
+            <!-- THAY LINK ẢNH BANNER VÀO src DƯỚI ĐÂY -->
+            <img id="parallax-banner" src="https://placehold.co/800x600/7f1d1d/ffffff?text=HUST+UNIFORM" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-80 scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6">
+                <span id="greeting" class="text-red-200 text-sm font-medium tracking-widest uppercase mb-1 drop-shadow-md"></span>
+                <h1 class="text-white text-3xl font-extrabold tracking-tight drop-shadow-lg leading-tight">Đồng Phục HUST<br><span class="text-red-400">Chính hãng</span></h1>
             </div>
         </div>
-    </div>
 
-    <!-- Nút Bảng Size -->
-    <div class="px-5 mt-4">
-        <button onclick="toggleSizeChart()" class="btn-ripple w-full py-3 px-5 bg-white border border-slate-200 hover:border-red-300 text-slate-700 rounded-xl font-semibold flex justify-between items-center shadow-sm transition-all duration-300 group">
-            <span class="flex items-center"><i class="fas fa-ruler text-hust-red mr-3 group-hover:scale-110 transition-transform"></i> Hướng dẫn chọn Size chuẩn</span>
-            <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-red-50 transition-colors">
-                <i class="fas fa-chevron-down text-sm transition-transform duration-300" id="size-chart-icon"></i>
+        <!-- Info Section -->
+        <div class="px-5 -mt-6 relative z-20">
+            <div class="bg-white p-4 rounded-2xl shadow-soft border border-slate-100 flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 animate-float">
+                    <i class="fas fa-headset text-hust-red text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-slate-600 leading-relaxed">Sản phẩm từ xưởng may riêng 100% chất lượng. Hỗ trợ đơn hàng liên hệ:</p>
+                    <p class="font-bold text-slate-800 mt-1"><i class="fas fa-user-circle text-hust-red mr-1"></i> Lợi Lê (Lớp trưởng IT-E6-02)</p>
+                </div>
             </div>
-        </button>
-        
-        <div id="size-chart-wrapper" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
-            <div class="overflow-hidden">
-                <div class="mt-3 bg-white p-2 rounded-xl shadow-inner border border-slate-200">
-                    <!-- THAY LINK ẢNH BẢNG SIZE DƯỚI ĐÂY -->
-                    <img src="https://placehold.co/600x400/f1f5f9/475569?text=B%E1%BA%A3ng+Size+(Tham+kh%E1%BA%A3o)" alt="Bảng size" class="w-full h-auto rounded-lg rounded-b-none">
-                    <div class="bg-red-50 text-red-600 text-xs text-center py-2 px-3 rounded-b-lg font-medium">
-                        <i class="fas fa-exclamation-triangle mr-1"></i> Lưu ý: Không hỗ trợ đổi trả nếu chọn sai size.
+        </div>
+
+        <!-- Bảng Size (Accordion) -->
+        <div class="px-5 mt-4">
+            <button onclick="toggleSizeChart()" class="btn-ripple w-full py-3 px-5 bg-white border border-slate-200 hover:border-red-300 text-slate-700 rounded-xl font-semibold flex justify-between items-center shadow-sm transition-all duration-300 group">
+                <span class="flex items-center"><i class="fas fa-ruler text-hust-red mr-3 group-hover:scale-110 transition-transform"></i> Hướng dẫn chọn Size chuẩn</span>
+                <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-red-50 transition-colors">
+                    <i class="fas fa-chevron-down text-sm transition-transform duration-300" id="size-chart-icon"></i>
+                </div>
+            </button>
+            
+            <div id="size-chart-wrapper" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+                <div class="overflow-hidden">
+                    <div class="mt-3 bg-white p-2 rounded-xl shadow-inner border border-slate-200">
+                        <!-- THAY LINK ẢNH BẢNG SIZE DƯỚI ĐÂY -->
+                        <img src="https://placehold.co/600x400/f1f5f9/475569?text=B%E1%BA%A3ng+Size+(Tham+kh%E1%BA%A3o)" alt="Bảng size" class="w-full h-auto rounded-lg rounded-b-none">
+                        <div class="bg-red-50 text-red-600 text-xs text-center py-2 px-3 rounded-b-lg font-medium">
+                            <i class="fas fa-exclamation-triangle mr-1"></i> Lưu ý: Không hỗ trợ đổi trả nếu chọn sai size.
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Danh sách sản phẩm -->
+        <div class="px-5 pt-8 pb-4">
+            <div class="flex justify-between items-end mb-5">
+                <h2 class="text-xl font-extrabold text-slate-800">Sản phẩm nổi bật</h2>
+                <span class="text-xs font-semibold bg-red-100 text-hust-red px-2 py-1 rounded-md" id="product-count">0 items</span>
+            </div>
+            <div class="space-y-5" id="product-list">
+                <!-- Javascript sẽ Inject danh sách sản phẩm vào đây -->
+            </div>
+        </div>
     </div>
 
-    <div id="step-1" class="page-section px-5 pt-8 pb-4 transition-all duration-500">
-        <div class="flex justify-between items-end mb-5">
-            <h2 class="text-xl font-extrabold text-slate-800">Sản phẩm nổi bật</h2>
-            <span class="text-xs font-semibold bg-red-100 text-hust-red px-2 py-1 rounded-md" id="product-count">0 items</span>
-        </div>
-        
-        <div class="space-y-5" id="product-list">
-            <!-- Sản phẩm sẽ được render qua JS -->
-        </div>
-    </div>
 
+    <!-- ========================================== -->
+    <!-- PHẦN 3: TRANG 2 - FORM THANH TOÁN (CHECKOUT VIEW) -->
+    <!-- ========================================== -->
     <div id="step-2" class="page-section px-5 pt-6 pb-4 hidden opacity-0 translate-y-10 transition-all duration-500">
         <button onclick="goBackToShop()" class="mb-4 text-slate-500 hover:text-hust-red font-medium text-sm flex items-center transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Quay lại cửa hàng
@@ -161,7 +176,7 @@
         <h2 class="text-2xl font-extrabold text-slate-800 mb-6">Thông tin giao hàng</h2>
         
         <form id="checkout-form" class="space-y-5" onsubmit="event.preventDefault(); submitOrder();">
-            <!-- Input Nhóm 1 -->
+            <!-- Khu vực nhập thông tin cá nhân -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 space-y-4">
                 <div class="relative">
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Họ và tên <span class="text-red-500">*</span></label>
@@ -196,9 +211,8 @@
                 </div>
             </div>
 
-            <!-- Thanh toán Section -->
+            <!-- Khu vực Thanh toán QR & Up Bill -->
             <div class="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl shadow-lg relative overflow-hidden text-white">
-                <!-- BG Decoration -->
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-white opacity-5 rounded-full blur-2xl"></div>
                 
                 <h3 class="font-bold text-lg mb-1 flex items-center"><i class="fas fa-wallet mr-2 text-red-400"></i> Thanh toán đơn hàng</h3>
@@ -209,7 +223,6 @@
                     <div class="bg-white p-2 rounded-xl shadow-lg relative group">
                         <!-- THAY LINK ẢNH MÃ QR NGÂN HÀNG VÀO DƯỚI ĐÂY -->
                         <img src="https://placehold.co/250x250/e0e7ff/4338ca?text=QR+CODE+BANK" alt="QR Bank" class="w-48 h-48 rounded-lg object-cover">
-                        <!-- Nút copy STK bằng JS -->
                         <button type="button" onclick="copySTK()" class="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center rounded-lg opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
                             <i class="fas fa-copy text-2xl mb-1"></i>
                             <span class="text-xs font-bold">Copy STK</span>
@@ -225,10 +238,8 @@
                     </div>
                 </div>
 
-                <!-- JS Image Upload Preview -->
                 <div class="mt-5">
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">Upload Ảnh Bill Chuyển Khoản <span class="text-red-400">*</span></label>
-                    
                     <div class="flex items-center justify-center w-full relative">
                         <label for="customer-bill" class="flex flex-col items-center justify-center w-full h-24 border-2 border-slate-600 border-dashed rounded-xl cursor-pointer bg-slate-800/50 hover:bg-slate-700/50 transition-colors group">
                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -239,7 +250,6 @@
                         </label>
                     </div>
                     
-                    <!-- Container hiện Preview ảnh bằng JS -->
                     <div id="bill-preview-container" class="hidden mt-3 relative w-32 h-40 rounded-lg overflow-hidden border border-slate-600 shadow-md">
                         <img id="bill-preview" class="w-full h-full object-cover" alt="Bill Preview">
                         <button type="button" onclick="clearBillPreview()" class="absolute top-1 right-1 bg-black/60 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs backdrop-blur-md">
@@ -248,15 +258,16 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Khoảng trống đẩy nút bấm -->
             <div class="h-10"></div>
         </form>
     </div>
 
+
+    <!-- ========================================== -->
+    <!-- PHẦN 4: TRANG 3 - MÀN HÌNH THÀNH CÔNG (SUCCESS VIEW) -->
+    <!-- ========================================== -->
     <div id="step-3" class="page-section fixed inset-0 z-50 bg-white hidden flex-col items-center justify-center px-5 opacity-0 transition-opacity duration-700">
         <div class="w-full max-w-md flex flex-col items-center text-center">
-            <!-- Icon check 3D style -->
             <div class="relative w-28 h-28 mb-8">
                 <div class="absolute inset-0 bg-green-200 rounded-full animate-ping opacity-40"></div>
                 <div class="relative w-full h-full bg-gradient-to-tr from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(74,222,128,0.4)] border-4 border-white transform scale-0" id="success-icon">
@@ -277,7 +288,11 @@
         </div>
     </div>
 
-    <!-- Giỏ hàng mở rộng -->
+
+    <!-- ========================================== -->
+    <!-- PHẦN 5: COMPONENTS - GIỎ HÀNG, MODAL, TOAST, BOTTOM BAR -->
+    <!-- ========================================== -->
+    <!-- Giỏ hàng mở rộng (Cart Details Overlay) -->
     <div id="cart-details" class="fixed bottom-[80px] left-0 right-0 max-w-md mx-auto bg-white rounded-t-3xl shadow-[0_-20px_40px_rgba(0,0,0,0.15)] z-40 transition-transform duration-300 translate-y-full border-x border-t border-slate-100">
         <div class="p-5">
             <div class="flex justify-between items-center mb-4">
@@ -285,15 +300,14 @@
                 <button onclick="toggleCart()" class="w-8 h-8 bg-slate-100 rounded-full text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition-colors flex items-center justify-center"><i class="fas fa-times"></i></button>
             </div>
             <div id="cart-items-container" class="space-y-3 max-h-[40vh] overflow-y-auto hide-scroll pr-1">
-                <!-- Render bằng JS -->
+                <!-- Javascript sẽ Inject danh sách item trong giỏ -->
             </div>
         </div>
     </div>
 
-    <!-- Thanh Bottom Bar Cố định (Glassmorphism) -->
+    <!-- Thanh Bottom Bar Cố định -->
     <div id="bottom-bar" class="fixed bottom-0 left-0 right-0 max-w-md mx-auto glass-panel z-50 transition-all duration-500 pb-safe">
         <div class="flex items-center justify-between p-4 px-5">
-            <!-- Icon Giỏ Hàng -->
             <div class="flex-1 cursor-pointer flex items-center group" onclick="toggleCart()">
                 <div class="relative bg-white p-3 rounded-2xl shadow-sm border border-slate-100 group-hover:border-red-200 group-hover:shadow-md transition-all">
                     <i class="fas fa-shopping-bag text-xl text-slate-700 group-hover:text-hust-red transition-colors"></i>
@@ -305,13 +319,12 @@
                 </div>
             </div>
             
-            <!-- Nút Hành động -->
             <div>
-                <!-- Nút trang chủ -->
+                <!-- Nút trang 1 -->
                 <button id="btn-next" onclick="goToCheckout()" class="btn-ripple bg-hust-red hover:bg-hust-red-dark text-white font-bold py-3.5 px-6 rounded-2xl shadow-glow transition-all disabled:opacity-50 disabled:shadow-none hidden items-center">
                     Thanh toán <i class="fas fa-arrow-right ml-2 text-sm"></i>
                 </button>
-                <!-- Nút trong form -->
+                <!-- Nút trang 2 -->
                 <button id="btn-submit" onclick="document.getElementById('checkout-form').requestSubmit()" class="btn-ripple bg-slate-900 hover:bg-black text-white font-bold py-3.5 px-6 rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all hidden items-center w-36 justify-center">
                     Gửi Đơn <i class="fas fa-paper-plane ml-2 text-sm"></i>
                 </button>
@@ -319,17 +332,15 @@
         </div>
     </div>
 
+    <!-- Modal Thêm sản phẩm (Popup) -->
     <div id="add-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] flex items-end sm:items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <!-- Đã sửa flex items-center ở trên và class translate cho desktop -->
         <div class="bg-white w-full max-w-md rounded-t-[2rem] sm:rounded-3xl p-6 transform translate-y-full sm:translate-y-0 sm:scale-95 transition-all duration-300 ease-out shadow-2xl relative" id="add-modal-content">
-            <!-- Drag Handle for Mobile -->
             <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-6 sm:hidden"></div>
-            
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-full w-9 h-9 flex items-center justify-center transition-colors"><i class="fas fa-times"></i></button>
 
             <div class="flex gap-4 mb-6">
-                <div id="modal-img-container" class="w-24 h-24 rounded-2xl bg-slate-50 shadow-sm border border-slate-100 overflow-hidden flex-shrink-0 relative">
-                     <!-- Cập nhật bằng JS -->
-                </div>
+                <div id="modal-img-container" class="w-24 h-24 rounded-2xl bg-slate-50 shadow-sm border border-slate-100 overflow-hidden flex-shrink-0 relative"></div>
                 <div class="flex flex-col justify-center">
                     <span class="text-xs font-bold text-red-500 uppercase tracking-wider mb-1" id="modal-tag">New</span>
                     <h3 class="font-extrabold text-xl text-slate-800 leading-tight mb-1" id="modal-title">Tên áo</h3>
@@ -343,7 +354,7 @@
                     <button onclick="closeModal(); setTimeout(toggleSizeChart, 300)" class="text-xs text-blue-600 hover:underline">Xem bảng size</button>
                 </div>
                 <div class="grid grid-cols-4 gap-2" id="modal-sizes">
-                    <!-- Nút Size sinh bởi JS -->
+                    <!-- Javascript Inject nút Size -->
                 </div>
             </div>
 
@@ -362,34 +373,42 @@
         </div>
     </div>
 
-    <!-- Toast tuỳ chỉnh bằng JS -->
+    <!-- Toast Notification (Thông báo góc trên) -->
     <div id="custom-toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-[70] transform -translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center bg-slate-800 text-white px-5 py-3 rounded-full shadow-2xl">
         <div id="toast-icon" class="mr-2 rounded-full w-6 h-6 flex items-center justify-center text-xs"></div>
         <span id="toast-msg" class="text-sm font-medium whitespace-nowrap">Message</span>
     </div>
 
+    <!-- ========================================== -->
+    <!-- PHẦN 6: JAVASCRIPT LOGIC (APP SCRIPT) -->
+    <!-- ========================================== -->
     <script>
-        // ----------------------------------------
-        // 1. DATA VÀ TRẠNG THÁI (STATE)
-        // ----------------------------------------
+        /* ==============================================
+           MODULE 1: DATA & CONFIG (Nơi lưu trữ dữ liệu chính)
+           Bạn muốn thêm/bớt Sản Phẩm? Sửa mảng `products` này.
+           ============================================== */
         const products = [
-            // THAY LINK ẢNH VÀO img
+            // Thay link ảnh thật vào 'img'
             { id: 'p1', name: 'Áo Khoác Gió HUST', price: 210000, img: 'https://placehold.co/400x400/cbd5e1/1e293b?text=Khoác+Gió', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', 'NC'], tag: 'Bán chạy' },
             { id: 'p2', name: 'Bộ Thể Dục (Áo & Quần)', price: 210000, img: 'https://placehold.co/400x400/cbd5e1/1e293b?text=Thể+Dục', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', 'NC'], tag: 'Bắt buộc' },
             { id: 'p3', name: 'Áo Polo Đỏ Truyền Thống', price: 160000, img: 'https://placehold.co/400x400/cbd5e1/1e293b?text=Polo+Đỏ', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', 'NC'], tag: 'Classic' }
         ];
 
-        let cart = []; 
-        let currentEditingProduct = null;
-        let selectedSize = null;
-        let currentStep = 1;
+        /* ==============================================
+           MODULE 2: APP STATE (Trạng thái hệ thống)
+           Chứa các biến thay đổi liên tục trong quá trình sử dụng
+           ============================================== */
+        let cart = []; // Mảng chứa các món hàng khách đã chọn
+        let currentEditingProduct = null; // SP đang được mở trong Modal
+        let selectedSize = null; // Size khách đang bấm chọn
+        let currentStep = 1; // 1: Trang chủ, 2: Form nhập thông tin, 3: Thành công
 
         // Tiện ích Format Tiền Tệ
         const formatMoney = (amount) => amount.toLocaleString('vi-VN') + 'đ';
 
-        // ----------------------------------------
-        // 2. KHỞI TẠO VÀ RENDER GIAO DIỆN CHÍNH
-        // ----------------------------------------
+        /* ==============================================
+           MODULE 3: INITIALIZATION (Khởi chạy khi mở trang)
+           ============================================== */
         window.onload = () => {
             initGreeting();
             renderProducts();
@@ -398,6 +417,10 @@
             updateBottomBarState();
         };
 
+        /* ==============================================
+           MODULE 4: UI RENDERERS & EVENT LISTENERS
+           Các hàm vẽ HTML lên màn hình
+           ============================================== */
         function initGreeting() {
             const hour = new Date().getHours();
             let text = "Chào buổi sáng";
@@ -406,7 +429,7 @@
             document.getElementById('greeting').innerText = text;
         }
 
-        // JS: Render danh sách với thẻ Tilt 3D
+        // Vẽ danh sách thẻ sản phẩm
         function renderProducts() {
             const container = document.getElementById('product-list');
             document.getElementById('product-count').innerText = `${products.length} Mẫu`;
@@ -414,14 +437,11 @@
             container.innerHTML = products.map((p, index) => `
                 <div class="tilt-card bg-white rounded-[1.5rem] shadow-sm border border-slate-100 p-3 flex gap-4 items-center relative overflow-hidden" 
                      style="animation: fadeSlideUp 0.5s ease forwards ${index * 0.1}s; opacity: 0;">
-                    <!-- Decor bg -->
                     <div class="absolute -right-10 -bottom-10 w-24 h-24 bg-red-50 rounded-full blur-xl z-0"></div>
-                    
                     <div class="w-28 h-28 rounded-2xl overflow-hidden shadow-inner z-10 flex-shrink-0 relative">
                         <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover">
                         ${p.tag ? `<div class="absolute top-0 left-0 bg-red-500 text-white text-[9px] font-bold px-2 py-1 rounded-br-lg z-10">${p.tag}</div>` : ''}
                     </div>
-                    
                     <div class="flex-1 z-10 tilt-content">
                         <h3 class="font-extrabold text-slate-800 text-base mb-1 leading-tight">${p.name}</h3>
                         <p class="text-hust-red font-bold text-lg mb-3">${formatMoney(p.price)}</p>
@@ -431,67 +451,9 @@
                     </div>
                 </div>
             `).join('');
-
-            // Kích hoạt hiệu ứng nghiêng 3D bằng JS (Vanilla)
             setTimeout(initTiltEffect, 500); 
         }
 
-        // JS: Hiệu ứng 3D Tilt khi di chuột trên Desktop (Hoặc vuốt mượt trên Mobile)
-        function initTiltEffect() {
-            const cards = document.querySelectorAll('.tilt-card');
-            cards.forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    if (window.innerWidth < 768) return; // Tắt trên màn hình nhỏ để đỡ giật
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left; 
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -8; // Cường độ nghiêng
-                    const rotateY = ((x - centerX) / centerX) * 8;
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                });
-            });
-        }
-
-        // JS: Hiệu ứng Parallax cho ảnh Banner khi cuộn
-        function initScrollParallax() {
-            const banner = document.getElementById('parallax-banner');
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                if(scrollY < 300) {
-                    banner.style.transform = `translateY(${scrollY * 0.4}px) scale(1.1)`;
-                }
-            });
-        }
-
-        // JS: Hệ thống tạo hiệu ứng nút Ripple
-        function initRippleEffect() {
-            document.body.addEventListener('click', e => {
-                const btn = e.target.closest('.btn-ripple');
-                if (!btn) return;
-                const circle = document.createElement('span');
-                const diameter = Math.max(btn.clientWidth, btn.clientHeight);
-                const radius = diameter / 2;
-                circle.style.width = circle.style.height = `${diameter}px`;
-                circle.style.left = `${e.clientX - btn.getBoundingClientRect().left - radius}px`;
-                circle.style.top = `${e.clientY - btn.getBoundingClientRect().top - radius}px`;
-                circle.classList.add('ripple-span');
-                
-                const existingRipple = btn.querySelector('.ripple-span');
-                if (existingRipple) existingRipple.remove();
-                
-                btn.appendChild(circle);
-                setTimeout(() => circle.remove(), 600);
-            });
-        }
-
-        // ----------------------------------------
-        // 3. LOGIC UI TƯƠNG TÁC (MODAL, SIZE, PREVIEW ẢNH)
-        // ----------------------------------------
         function toggleSizeChart() {
             const wrapper = document.getElementById('size-chart-wrapper');
             const icon = document.getElementById('size-chart-icon');
@@ -504,6 +466,10 @@
             }
         }
 
+        /* ==============================================
+           MODULE 5: MODAL & PRODUCT SELECTION LOGIC
+           Quản lý Cửa sổ Popup (chọn size, chọn số lượng)
+           ============================================== */
         function openAddModal(productId) {
             currentEditingProduct = products.find(p => p.id === productId);
             selectedSize = null;
@@ -512,11 +478,9 @@
             document.getElementById('modal-title').innerText = currentEditingProduct.name;
             document.getElementById('modal-price').innerText = formatMoney(currentEditingProduct.price);
             document.getElementById('modal-tag').innerText = currentEditingProduct.tag || 'Sản phẩm';
-            
-            // Effect bay ảnh vào
             document.getElementById('modal-img-container').innerHTML = `<img src="${currentEditingProduct.img}" class="w-full h-full object-cover transform scale-110 transition-transform duration-500 hover:scale-100">`;
 
-            // Render nút size
+            // Vẽ nút Size
             const sizesHtml = currentEditingProduct.sizes.map(size => `
                 <button onclick="selectSize('${size}')" id="btn-size-${size}" class="size-btn py-3 text-sm font-bold border-2 border-slate-100 rounded-xl hover:border-red-200 transition-all text-slate-600 bg-white shadow-sm">
                     ${size}
@@ -524,14 +488,11 @@
             `).join('');
             document.getElementById('modal-sizes').innerHTML = sizesHtml;
 
-            // JS: Xử lý Animation hiện Modal mượt mà
+            // Show Modal UI
             const modal = document.getElementById('add-modal');
             const content = document.getElementById('add-modal-content');
             modal.classList.remove('hidden');
-            
-            // Ép reflow để CSS transition hoạt động
-            void modal.offsetWidth;
-            
+            void modal.offsetWidth; // Force Reflow
             modal.classList.remove('opacity-0', 'pointer-events-none');
             content.classList.remove('translate-y-full', 'sm:scale-95');
         }
@@ -539,11 +500,8 @@
         function closeModal() {
             const modal = document.getElementById('add-modal');
             const content = document.getElementById('add-modal-content');
-            
             modal.classList.add('opacity-0', 'pointer-events-none');
             content.classList.add('translate-y-full', 'sm:scale-95');
-            
-            // setTimeout cho transition xong mới hidden DOM
             setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
@@ -556,8 +514,6 @@
             const btn = document.getElementById(`btn-size-${size}`);
             btn.classList.remove('border-slate-100', 'text-slate-600', 'bg-white');
             btn.classList.add('bg-red-50', 'border-hust-red', 'text-hust-red');
-            
-            // Pop effect khi chọn
             btn.style.transform = 'scale(0.95)';
             setTimeout(() => btn.style.transform = 'scale(1)', 150);
         }
@@ -567,7 +523,6 @@
             let val = parseInt(input.value) + delta;
             if (val >= 1 && val <= 50) {
                 input.value = val;
-                // Nháy effect nhẹ số lượng
                 input.style.transform = 'scale(1.2)';
                 input.style.color = '#c62828';
                 setTimeout(() => {
@@ -577,39 +532,13 @@
             }
         }
 
-        // JS: Logic đọc file và hiện Preview Ảnh Bill tức thì
-        const fileInput = document.getElementById('customer-bill');
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('bill-preview').src = e.target.result;
-                    document.getElementById('bill-preview-container').classList.remove('hidden');
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        function clearBillPreview() {
-            document.getElementById('customer-bill').value = '';
-            document.getElementById('bill-preview-container').classList.add('hidden');
-            document.getElementById('bill-preview').src = '';
-        }
-
-        function copySTK() {
-            navigator.clipboard.writeText("0987654321").then(() => {
-                showToast("Đã copy Số tài khoản", "success");
-            });
-        }
-
-        // ----------------------------------------
-        // 4. LOGIC GIỎ HÀNG (CART JS)
-        // ----------------------------------------
+        /* ==============================================
+           MODULE 6: CART LOGIC (Quản lý Giỏ hàng)
+           Xử lý logic mảng giỏ hàng, cộng trừ tiền
+           ============================================== */
         function confirmAddToCart() {
             if (!selectedSize) {
                 showToast("Vui lòng chọn Size áo nhé!", "error");
-                // Lắc nhẹ khu vực chọn size
                 const sizeBox = document.getElementById('modal-sizes');
                 sizeBox.style.transform = 'translateX(5px)';
                 setTimeout(() => sizeBox.style.transform = 'translateX(-5px)', 100);
@@ -618,6 +547,7 @@
             }
             
             const qty = parseInt(document.getElementById('modal-qty').value);
+            // Kiểm tra món hàng (Trùng áo và trùng size thì cộng gộp số lượng)
             const existingIndex = cart.findIndex(item => item.product.id === currentEditingProduct.id && item.size === selectedSize);
             
             if (existingIndex > -1) {
@@ -630,7 +560,7 @@
             closeModal();
             showToast("Đã thêm vào giỏ hàng", "success");
             
-            // Bật badge giỏ hàng pop lên
+            // Effect giật nẩy icon giỏ hàng
             const badge = document.getElementById('cart-count');
             badge.classList.remove('scale-0');
             badge.classList.add('scale-100', 'animate-bounce');
@@ -647,7 +577,7 @@
                     <i class="fas fa-box-open text-3xl mb-2 opacity-50"></i>
                     <p class="text-sm font-medium">Giỏ hàng đang trống</p>
                 </div>`;
-                document.getElementById('cart-count').classList.add('scale-0'); // Ẩn badge nếu trống
+                document.getElementById('cart-count').classList.add('scale-0');
             } else {
                 container.innerHTML = cart.map((item, index) => {
                     const itemTotal = item.product.price * item.qty;
@@ -695,7 +625,196 @@
             }
         }
 
-        // JS: Toast Notification System mượt mà
+        /* ==============================================
+           MODULE 7: CHECKOUT FORM & FILE UPLOAD
+           Xử lý Form thanh toán và đọc ảnh Offline
+           ============================================== */
+        const fileInput = document.getElementById('customer-bill');
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('bill-preview').src = e.target.result;
+                    document.getElementById('bill-preview-container').classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function clearBillPreview() {
+            document.getElementById('customer-bill').value = '';
+            document.getElementById('bill-preview-container').classList.add('hidden');
+            document.getElementById('bill-preview').src = '';
+        }
+
+        function copySTK() {
+            navigator.clipboard.writeText("0987654321").then(() => {
+                showToast("Đã copy Số tài khoản", "success");
+            });
+        }
+
+        /* ==============================================
+           MODULE 8: PAGE NAVIGATION (Điều hướng trang)
+           ============================================== */
+        function updateBottomBarState() {
+            const btnNext = document.getElementById('btn-next');
+            const btnSubmit = document.getElementById('btn-submit');
+            const bottomBar = document.getElementById('bottom-bar');
+
+            if (currentStep === 1) {
+                btnSubmit.classList.add('hidden');
+                btnNext.classList.remove('hidden');
+                if (cart.length > 0) {
+                    btnNext.disabled = false;
+                    btnNext.classList.remove('opacity-50', 'shadow-none');
+                } else {
+                    btnNext.disabled = true;
+                    btnNext.classList.add('opacity-50', 'shadow-none');
+                }
+            } else if (currentStep === 2) {
+                btnNext.classList.add('hidden');
+                btnSubmit.classList.remove('hidden');
+                btnSubmit.classList.add('flex');
+            } else if (currentStep === 3) {
+                bottomBar.style.transform = 'translateY(100%)';
+            }
+        }
+
+        function switchPage(hideId, showId, newStepNumber) {
+            const hideEl = document.getElementById(hideId);
+            const showEl = document.getElementById(showId);
+            
+            const cartDetails = document.getElementById('cart-details');
+            if(!cartDetails.classList.contains('translate-y-full')) {
+                cartDetails.classList.replace('translate-y-0', 'translate-y-full');
+            }
+            
+            hideEl.classList.remove('opacity-100', 'translate-y-0');
+            hideEl.classList.add('opacity-0', '-translate-y-10');
+            
+            setTimeout(() => {
+                hideEl.classList.add('hidden');
+                showEl.classList.remove('hidden');
+                showEl.classList.add('opacity-0', 'translate-y-10');
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                currentStep = newStepNumber;
+                updateBottomBarState();
+                
+                void showEl.offsetWidth; // Force Reflow
+                showEl.classList.remove('opacity-0', 'translate-y-10');
+            }, 300);
+        }
+
+        function goToCheckout() {
+            if (cart.length === 0) return;
+            switchPage('step-1', 'step-2', 2);
+        }
+
+        function goBackToShop() {
+            const step2 = document.getElementById('step-2');
+            step2.classList.add('opacity-0', 'translate-y-10');
+            setTimeout(() => {
+                step2.classList.add('hidden');
+                const step1 = document.getElementById('step-1');
+                step1.classList.remove('hidden', '-translate-y-10', 'opacity-0');
+                currentStep = 1;
+                updateBottomBarState();
+            }, 300);
+        }
+
+        /* ==============================================
+           MODULE 9: SUBMIT DATA & API CALL (Giả lập)
+           Format chuỗi text gọn gàng cho Google Sheet
+           ============================================== */
+        function formatOrderForSheet() {
+            // ÉP TOÀN BỘ GIỎ HÀNG THÀNH 1 DÒNG TEXT DUY NHẤT.
+            return cart.map(item => `${item.qty}x ${item.product.name} (Size: ${item.size})`).join(' \n'); 
+        }
+
+        function submitOrder() {
+            const form = document.getElementById('checkout-form');
+            if (!form.checkValidity()) return; // Kiểm tra đã điền đủ trường bắt buộc chưa
+
+            const btn = document.getElementById('btn-submit');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<div class="loader"></div>';
+            btn.disabled = true;
+
+            // ĐÂY LÀ KHỐI DỮ LIỆU SẼ GỬI ĐẾN GOOGLE SHEET (Rất gọn gàng)
+            const orderData = {
+                "Tên": document.getElementById('customer-name').value,
+                "SĐT": document.getElementById('customer-phone').value,
+                "Địa chỉ": document.getElementById('customer-address').value,
+                "Đơn hàng": formatOrderForSheet(), // <-- Điều kì diệu ở đây
+                "Tổng tiền": document.getElementById('cart-total').innerText,
+                "Ghi chú": document.getElementById('customer-note').value
+            };
+            
+            console.log("=== DATA SẴN SÀNG ĐỔ VỀ GOOGLE SHEET ===", orderData);
+
+            // MÔ PHỎNG MẠNG INTERNET CHẬM (1.5s)
+            setTimeout(() => {
+                // Thành công
+                const step2 = document.getElementById('step-2');
+                const step3 = document.getElementById('step-3');
+                
+                step2.classList.add('hidden');
+                step3.classList.remove('hidden');
+                step3.classList.add('flex');
+                
+                setTimeout(() => {
+                    step3.classList.remove('opacity-0');
+                    document.getElementById('bottom-bar').style.transform = 'translateY(100%)';
+                    
+                    setTimeout(() => {
+                        document.getElementById('success-icon').classList.remove('scale-0');
+                        document.getElementById('success-icon').classList.add('scale-100', 'transition-transform', 'duration-500', 'ease-out');
+                        
+                        startConfetti(); // Bắn pháo hoa
+                        
+                        setTimeout(() => { document.getElementById('success-title').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-title').classList.add('transition-all', 'duration-500'); }, 200);
+                        setTimeout(() => { document.getElementById('success-desc').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-desc').classList.add('transition-all', 'duration-500'); }, 400);
+                        setTimeout(() => { document.getElementById('success-btn').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-btn').classList.add('transition-all', 'duration-500'); }, 600);
+                    }, 100);
+                }, 50);
+
+                // Reset Data sau khi gửi
+                cart = [];
+                updateCartUI();
+                form.reset();
+                clearBillPreview();
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                currentStep = 3;
+            }, 1500);
+        }
+
+        function resetToHome() {
+            const step3 = document.getElementById('step-3');
+            step3.classList.add('opacity-0');
+            setTimeout(() => {
+                step3.classList.remove('flex');
+                step3.classList.add('hidden');
+                
+                const step1 = document.getElementById('step-1');
+                step1.classList.remove('hidden', '-translate-y-10', 'opacity-0');
+                
+                document.getElementById('bottom-bar').style.transform = 'translateY(0)';
+                currentStep = 1;
+                updateBottomBarState();
+                
+                const canvas = document.getElementById('confetti-canvas');
+                canvas.classList.add('hidden');
+            }, 500);
+        }
+
+        /* ==============================================
+           MODULE 10: EFFECTS & ANIMATIONS (Hiệu ứng)
+           Toast Notification, Pháo hoa, Hiệu ứng nổi 3D
+           ============================================== */
         let toastTimeout;
         function showToast(msg, type = "success") {
             const toast = document.getElementById('custom-toast');
@@ -721,181 +840,6 @@
             }, 3000);
         }
 
-        // ----------------------------------------
-        // 5. ĐIỀU HƯỚNG & XỬ LÝ FORM (Chuyển trang mượt)
-        // ----------------------------------------
-        function updateBottomBarState() {
-            const btnNext = document.getElementById('btn-next');
-            const btnSubmit = document.getElementById('btn-submit');
-            const bottomBar = document.getElementById('bottom-bar');
-
-            if (currentStep === 1) {
-                btnSubmit.classList.add('hidden');
-                btnNext.classList.remove('hidden');
-                
-                if (cart.length > 0) {
-                    btnNext.disabled = false;
-                    btnNext.classList.remove('opacity-50', 'shadow-none');
-                } else {
-                    btnNext.disabled = true;
-                    btnNext.classList.add('opacity-50', 'shadow-none');
-                }
-            } else if (currentStep === 2) {
-                btnNext.classList.add('hidden');
-                btnSubmit.classList.remove('hidden');
-                btnSubmit.classList.add('flex');
-            } else if (currentStep === 3) {
-                // Ẩn toàn bộ bottom bar ở màn hình thành công
-                bottomBar.style.transform = 'translateY(100%)';
-            }
-        }
-
-        // JS: Custom Animation Chuyển Trang
-        function switchPage(hideId, showId, newStepNumber) {
-            const hideEl = document.getElementById(hideId);
-            const showEl = document.getElementById(showId);
-            
-            // Đóng giỏ hàng nếu đang mở
-            const cartDetails = document.getElementById('cart-details');
-            if(!cartDetails.classList.contains('translate-y-full')) {
-                cartDetails.classList.replace('translate-y-0', 'translate-y-full');
-            }
-            
-            // Fade out trang cũ
-            hideEl.classList.remove('opacity-100', 'translate-y-0');
-            hideEl.classList.add('opacity-0', '-translate-y-10');
-            
-            setTimeout(() => {
-                hideEl.classList.add('hidden');
-                
-                // Chuẩn bị trang mới (ẩn đi và nằm dưới)
-                showEl.classList.remove('hidden');
-                showEl.classList.add('opacity-0', 'translate-y-10');
-                
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                
-                currentStep = newStepNumber;
-                updateBottomBarState();
-                
-                // Kích hoạt reflow và Fade in trang mới
-                void showEl.offsetWidth;
-                showEl.classList.remove('opacity-0', 'translate-y-10');
-                // showEl.classList.add('opacity-100', 'translate-y-0'); (Class mặc định đã có)
-            }, 300);
-        }
-
-        function goToCheckout() {
-            if (cart.length === 0) return;
-            switchPage('step-1', 'step-2', 2);
-        }
-
-        function goBackToShop() {
-            // Revert animation về step 1
-            const step2 = document.getElementById('step-2');
-            step2.classList.add('opacity-0', 'translate-y-10');
-            setTimeout(() => {
-                step2.classList.add('hidden');
-                const step1 = document.getElementById('step-1');
-                step1.classList.remove('hidden', '-translate-y-10', 'opacity-0');
-                currentStep = 1;
-                updateBottomBarState();
-            }, 300);
-        }
-
-        // Format đơn hàng cho Sheet
-        function formatOrderForSheet() {
-            return cart.map(item => `${item.qty}x ${item.product.name} (Size: ${item.size})`).join(' \n'); // Xuống dòng cho dễ nhìn
-        }
-
-        // ----------------------------------------
-        // 6. XỬ LÝ SUBMIT & HIỆU ỨNG THÀNH CÔNG (CONFETTI)
-        // ----------------------------------------
-        function submitOrder() {
-            const form = document.getElementById('checkout-form');
-            if (!form.checkValidity()) return;
-
-            const btn = document.getElementById('btn-submit');
-            // Đổi state nút sang loading (Vòng xoay JS thuần bằng CSS classes)
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<div class="loader"></div>';
-            btn.disabled = true;
-
-            // Gom dữ liệu gọn gàng
-            const orderData = {
-                "Tên": document.getElementById('customer-name').value,
-                "SĐT": document.getElementById('customer-phone').value,
-                "Địa chỉ": document.getElementById('customer-address').value,
-                "Đơn hàng": formatOrderForSheet(), // 1 DÒNG DUY NHẤT
-                "Tổng tiền": document.getElementById('cart-total').innerText,
-                "Ghi chú": document.getElementById('customer-note').value
-            };
-            
-            console.log("=== DATA ĐỔ VỀ GG SHEET CỰC GỌN ===", orderData);
-
-            // MÔ PHỎNG CALL API (1.5s)
-            setTimeout(() => {
-                // Chuyển sang màn hình thành công
-                const step2 = document.getElementById('step-2');
-                const step3 = document.getElementById('step-3');
-                
-                step2.classList.add('hidden');
-                step3.classList.remove('hidden');
-                step3.classList.add('flex');
-                
-                // Animation vào cho các phần tử của màn thành công
-                setTimeout(() => {
-                    step3.classList.remove('opacity-0');
-                    document.getElementById('bottom-bar').style.transform = 'translateY(100%)';
-                    
-                    // Pop Icon
-                    setTimeout(() => {
-                        document.getElementById('success-icon').classList.remove('scale-0');
-                        document.getElementById('success-icon').classList.add('scale-100', 'transition-transform', 'duration-500', 'ease-out');
-                        
-                        // Bắn pháo hoa bằng JS
-                        startConfetti();
-                        
-                        // Trượt chữ lên
-                        setTimeout(() => { document.getElementById('success-title').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-title').classList.add('transition-all', 'duration-500'); }, 200);
-                        setTimeout(() => { document.getElementById('success-desc').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-desc').classList.add('transition-all', 'duration-500'); }, 400);
-                        setTimeout(() => { document.getElementById('success-btn').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-btn').classList.add('transition-all', 'duration-500'); }, 600);
-                        
-                    }, 100);
-                }, 50);
-
-                // Reset Data
-                cart = [];
-                updateCartUI();
-                form.reset();
-                clearBillPreview();
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
-                currentStep = 3;
-            }, 1500);
-        }
-
-        function resetToHome() {
-            const step3 = document.getElementById('step-3');
-            step3.classList.add('opacity-0');
-            setTimeout(() => {
-                step3.classList.remove('flex');
-                step3.classList.add('hidden');
-                
-                const step1 = document.getElementById('step-1');
-                step1.classList.remove('hidden', '-translate-y-10', 'opacity-0');
-                
-                document.getElementById('bottom-bar').style.transform = 'translateY(0)';
-                
-                currentStep = 1;
-                updateBottomBarState();
-                
-                // Tắt pháo hoa
-                const canvas = document.getElementById('confetti-canvas');
-                canvas.classList.add('hidden');
-            }, 500);
-        }
-
-        // JS: HỆ THỐNG PHÁO HOA (CONFETTI PARTICLE SYSTEM) THUẦN
         function startConfetti() {
             const canvas = document.getElementById('confetti-canvas');
             canvas.classList.remove('hidden');
@@ -908,15 +852,10 @@
 
             for (let i = 0; i < 150; i++) {
                 particles.push({
-                    x: canvas.width / 2, // Bắn từ giữa
-                    y: canvas.height / 2 + 50,
-                    r: Math.random() * 6 + 2,
-                    dx: Math.random() * 10 - 5,
-                    dy: Math.random() * -15 - 5,
+                    x: canvas.width / 2, y: canvas.height / 2 + 50,
+                    r: Math.random() * 6 + 2, dx: Math.random() * 10 - 5, dy: Math.random() * -15 - 5,
                     color: colors[Math.floor(Math.random() * colors.length)],
-                    tilt: Math.floor(Math.random() * 10) - 10,
-                    tiltAngleInc: (Math.random() * 0.07) + 0.05,
-                    tiltAngle: 0
+                    tilt: Math.floor(Math.random() * 10) - 10, tiltAngleInc: (Math.random() * 0.07) + 0.05, tiltAngle: 0
                 });
             }
 
@@ -924,37 +863,64 @@
             function renderConfetti() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 let remaining = false;
-                
                 particles.forEach((p, index) => {
                     p.tiltAngle += p.tiltAngleInc;
                     p.y += (Math.cos(p.tiltAngle) + 1 + p.r / 2) / 2;
                     p.x += Math.sin(p.tiltAngle) * 2 + p.dx;
-                    p.dy += 0.2; // gravity
-                    p.y += p.dy;
-                    
+                    p.dy += 0.2; p.y += p.dy;
                     if (p.y <= canvas.height) remaining = true;
-
                     ctx.beginPath();
-                    ctx.lineWidth = p.r;
-                    ctx.strokeStyle = p.color;
+                    ctx.lineWidth = p.r; ctx.strokeStyle = p.color;
                     ctx.moveTo(p.x + p.tilt + p.r, p.y);
                     ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r);
                     ctx.stroke();
                 });
-
-                if (remaining) {
-                    animationId = requestAnimationFrame(renderConfetti);
-                } else {
-                    cancelAnimationFrame(animationId);
-                }
+                if (remaining) animationId = requestAnimationFrame(renderConfetti);
+                else cancelAnimationFrame(animationId);
             }
             renderConfetti();
-            
-            // Xử lý resize canvas
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }, {once: true});
+        }
+
+        function initTiltEffect() {
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    if (window.innerWidth < 768) return; 
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+                    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -8; 
+                    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 8;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+        }
+
+        function initScrollParallax() {
+            const banner = document.getElementById('parallax-banner');
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if(scrollY < 300) banner.style.transform = `translateY(${scrollY * 0.4}px) scale(1.1)`;
+            });
+        }
+
+        function initRippleEffect() {
+            document.body.addEventListener('click', e => {
+                const btn = e.target.closest('.btn-ripple');
+                if (!btn) return;
+                const circle = document.createElement('span');
+                const d = Math.max(btn.clientWidth, btn.clientHeight);
+                circle.style.width = circle.style.height = `${d}px`;
+                circle.style.left = `${e.clientX - btn.getBoundingClientRect().left - d/2}px`;
+                circle.style.top = `${e.clientY - btn.getBoundingClientRect().top - d/2}px`;
+                circle.classList.add('ripple-span');
+                const existing = btn.querySelector('.ripple-span');
+                if (existing) existing.remove();
+                btn.appendChild(circle);
+                setTimeout(() => circle.remove(), 600);
+            });
         }
     </script>
 </div>
