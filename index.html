@@ -110,7 +110,7 @@
         <!-- Banner -->
         <div class="relative w-full h-56 overflow-hidden rounded-b-[2.5rem] shadow-lg z-10 bg-black">
             <!-- THAY LINK ẢNH BANNER VÀO src DƯỚI ĐÂY -->
-            <img id="parallax-banner" src="AnhBia.PNG" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-80 scale-110">
+            <img id="parallax-banner" src="AnhBia.PNG" alt="Banner" class="absolute inset-0 w-full h-full object-cover opacity-80 scale-110" onerror="this.src='https://images.unsplash.com/photo-1555529733-0e670560f4e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6">
                 <span id="greeting" class="text-red-200 text-sm font-medium tracking-widest uppercase mb-1 drop-shadow-md"></span>
                 <h1 class="text-white text-3xl font-extrabold tracking-tight drop-shadow-lg leading-tight">Đồng Phục HUST<br><span class="text-red-400">Chính hãng</span></h1>
@@ -143,7 +143,7 @@
                 <div class="overflow-hidden">
                     <div class="mt-3 bg-white p-2 rounded-xl shadow-inner border border-slate-200">
                         <!-- THAY LINK ẢNH BẢNG SIZE DƯỚI ĐÂY -->
-                        <img src="bangsize.PNG" alt="Bảng size" class="w-full h-auto rounded-lg rounded-b-none">
+                        <img src="bangsize.PNG" alt="Bảng size" class="w-full h-auto rounded-lg rounded-b-none" onerror="this.style.display='none'">
                         <div class="bg-red-50 text-red-600 text-xs text-center py-2 px-3 rounded-b-lg font-medium">
                             <i class="fas fa-exclamation-triangle mr-1"></i> Lưu ý: Không hỗ trợ đổi trả nếu chọn sai size.
                         </div>
@@ -222,7 +222,7 @@
                     <p class="text-sm font-medium mb-3">Quét mã QR để chuyển khoản:</p>
                     <div class="bg-white p-2 rounded-xl shadow-lg relative group">
                         <!-- THAY LINK ẢNH MÃ QR NGÂN HÀNG VÀO DƯỚI ĐÂY -->
-                        <img src="QR.jpg" alt="QR Bank" class="w-48 h-48 rounded-lg object-cover">
+                        <img src="QR.jpg" alt="QR Bank" class="w-48 h-48 rounded-lg object-cover" onerror="this.src='https://placehold.co/400x400/blue/white?text=QR+Code'">
                         <button type="button" onclick="copySTK()" class="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center rounded-lg opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
                             <i class="fas fa-copy text-2xl mb-1"></i>
                             <span class="text-xs font-bold">Copy STK</span>
@@ -241,12 +241,13 @@
                 <div class="mt-5">
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">Upload Ảnh Bill Chuyển Khoản <span class="text-red-400">*</span></label>
                     <div class="flex items-center justify-center w-full relative">
+                        <!-- Đã bỏ required để tránh bị kẹt form vì chưa có backend xịn xử lý file -->
                         <label for="customer-bill" class="flex flex-col items-center justify-center w-full h-24 border-2 border-slate-600 border-dashed rounded-xl cursor-pointer bg-slate-800/50 hover:bg-slate-700/50 transition-colors group">
                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                 <i class="fas fa-cloud-upload-alt text-2xl text-slate-400 group-hover:text-red-400 transition-colors mb-2"></i>
                                 <p class="text-xs text-slate-400"><span class="font-semibold text-white">Bấm để chọn ảnh</span> hoặc kéo thả</p>
                             </div>
-                            <input id="customer-bill" type="file" required accept="image/*" class="hidden" />
+                            <input id="customer-bill" type="file" accept="image/*" class="hidden" />
                         </label>
                     </div>
                     
@@ -334,7 +335,6 @@
 
     <!-- Modal Thêm sản phẩm (Popup) -->
     <div id="add-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] flex items-end sm:items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-        <!-- Đã sửa flex items-center ở trên và class translate cho desktop -->
         <div class="bg-white w-full max-w-md rounded-t-[2rem] sm:rounded-3xl p-6 transform translate-y-full sm:translate-y-0 sm:scale-95 transition-all duration-300 ease-out shadow-2xl relative" id="add-modal-content">
             <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-6 sm:hidden"></div>
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-full w-9 h-9 flex items-center justify-center transition-colors"><i class="fas fa-times"></i></button>
@@ -361,13 +361,13 @@
             <div class="flex items-center justify-between mb-8 bg-slate-50 p-4 rounded-2xl border border-slate-100">
                 <p class="text-sm font-bold text-slate-700">Số lượng</p>
                 <div class="flex items-center bg-white border border-slate-200 rounded-xl shadow-sm p-1">
-                    <button onclick="changeQty(-1)" class="w-8 h-8 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition-colors"><i class="fas fa-minus text-xs"></i></button>
+                    <button type="button" onclick="changeQty(-1)" class="w-8 h-8 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition-colors"><i class="fas fa-minus text-xs"></i></button>
                     <input type="number" id="modal-qty" value="1" min="1" max="50" class="w-12 text-center font-bold text-slate-800 bg-transparent outline-none" readonly>
-                    <button onclick="changeQty(1)" class="w-8 h-8 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition-colors"><i class="fas fa-plus text-xs"></i></button>
+                    <button type="button" onclick="changeQty(1)" class="w-8 h-8 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition-colors"><i class="fas fa-plus text-xs"></i></button>
                 </div>
             </div>
 
-            <button onclick="confirmAddToCart()" class="btn-ripple w-full bg-hust-red hover:bg-hust-red-dark text-white font-bold py-4 rounded-2xl transition-all shadow-glow flex justify-center items-center">
+            <button type="button" onclick="confirmAddToCart()" class="btn-ripple w-full bg-hust-red hover:bg-hust-red-dark text-white font-bold py-4 rounded-2xl transition-all shadow-glow flex justify-center items-center">
                 <i class="fas fa-cart-plus mr-2"></i> Thêm vào giỏ
             </button>
         </div>
@@ -439,7 +439,7 @@
                      style="animation: fadeSlideUp 0.5s ease forwards ${index * 0.1}s; opacity: 0;">
                     <div class="absolute -right-10 -bottom-10 w-24 h-24 bg-red-50 rounded-full blur-xl z-0"></div>
                     <div class="w-28 h-28 rounded-2xl overflow-hidden shadow-inner z-10 flex-shrink-0 relative">
-                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover">
+                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/eee/999?text=Image'">
                         ${p.tag ? `<div class="absolute top-0 left-0 bg-red-500 text-white text-[9px] font-bold px-2 py-1 rounded-br-lg z-10">${p.tag}</div>` : ''}
                     </div>
                     <div class="flex-1 z-10 tilt-content">
@@ -478,11 +478,11 @@
             document.getElementById('modal-title').innerText = currentEditingProduct.name;
             document.getElementById('modal-price').innerText = formatMoney(currentEditingProduct.price);
             document.getElementById('modal-tag').innerText = currentEditingProduct.tag || 'Sản phẩm';
-            document.getElementById('modal-img-container').innerHTML = `<img src="${currentEditingProduct.img}" class="w-full h-full object-cover transform scale-110 transition-transform duration-500 hover:scale-100">`;
+            document.getElementById('modal-img-container').innerHTML = `<img src="${currentEditingProduct.img}" class="w-full h-full object-cover transform scale-110 transition-transform duration-500 hover:scale-100" onerror="this.src='https://placehold.co/200x200/eee/999?text=Image'">`;
 
             // Vẽ nút Size
             const sizesHtml = currentEditingProduct.sizes.map(size => `
-                <button onclick="selectSize('${size}')" id="btn-size-${size}" class="size-btn py-3 text-sm font-bold border-2 border-slate-100 rounded-xl hover:border-red-200 transition-all text-slate-600 bg-white shadow-sm">
+                <button type="button" onclick="selectSize('${size}')" id="btn-size-${size}" class="size-btn py-3 text-sm font-bold border-2 border-slate-100 rounded-xl hover:border-red-200 transition-all text-slate-600 bg-white shadow-sm">
                     ${size}
                 </button>
             `).join('');
@@ -585,7 +585,7 @@
                     totalPrice += itemTotal;
                     return `
                         <div class="flex gap-3 items-center bg-slate-50 p-3 rounded-2xl border border-slate-100 animate-fade-slide-up" style="animation-delay: ${index*0.05}s">
-                            <img src="${item.product.img}" class="w-14 h-14 rounded-xl object-cover shadow-sm">
+                            <img src="${item.product.img}" class="w-14 h-14 rounded-xl object-cover shadow-sm" onerror="this.src='https://placehold.co/100x100/eee/999?text=Item'">
                             <div class="flex-1">
                                 <p class="text-sm font-bold text-slate-800 leading-tight">${item.product.name}</p>
                                 <p class="text-xs text-slate-500 mt-1">Size: <span class="font-bold text-slate-700 bg-slate-200 px-1.5 py-0.5 rounded">${item.size}</span> x ${item.qty}</p>
@@ -726,118 +726,99 @@
         }
 
         /* ==============================================
-           MODULE 9: SUBMIT DATA & API CALL (Giả lập)
+           MODULE 9: SUBMIT DATA & API CALL
            Format chuỗi text gọn gàng cho Google Sheet
            ============================================== */
         function formatOrderForSheet() {
-            // ÉP TOÀN BỘ GIỎ HÀNG THÀNH 1 DÒNG TEXT DUY NHẤT.
-            return cart.map(item => `${item.qty}x ${item.product.name} (Size: ${item.size})`).join(' \n'); 
+            // Ép toàn bộ giỏ hàng thành 1 dòng text duy nhất.
+            return cart.map(item => `${item.qty}x ${item.product.name} (Size: ${item.size})`).join(' | ');
         }
-<!-- ... existing code ... -->
-function formatOrderForSheet() {
-    // Ép toàn bộ giỏ hàng thành 1 dòng text duy nhất.
-    return cart.map(item => `${item.qty}x ${item.product.name} (Size: ${item.size})`).join(' | ');
-}
 
-function submitOrder() {
-    const form = document.getElementById('checkout-form');
-    // reportValidity() giúp tự động hiện thông báo đỏ nếu khách quên điền tên, sđt...
-    if (!form.reportValidity()) return; 
+        function submitOrder() {
+            const form = document.getElementById('checkout-form');
+            // reportValidity() giúp tự động hiện thông báo đỏ nếu khách quên điền tên, sđt...
+            if (!form.reportValidity()) return; 
 
-    const btn = document.getElementById('btn-submit');
-    const originalHTML = btn.innerHTML;
-    
-    // Đổi nút thành vòng xoay loading để khách biết đang xử lý
-    btn.innerHTML = '<div class="mx-auto h-5 w-5 rounded-full border-2 border-solid border-white/20 border-t-white animate-spin"></div>';
-    btn.disabled = true;
+            const btn = document.getElementById('btn-submit');
+            const originalHTML = btn.innerHTML;
+            
+            // Đổi nút thành vòng xoay loading để khách biết đang xử lý
+            btn.innerHTML = '<div class="mx-auto h-5 w-5 rounded-full border-2 border-solid border-white/20 border-t-white animate-spin"></div>';
+            btn.disabled = true;
 
-    // ĐÂY LÀ KHỐI DỮ LIỆU SẼ GỬI ĐẾN GOOGLE SHEET (Các chữ màu xanh phải giữ nguyên tiếng Anh)
-    const orderData = {
-        name: document.getElementById('customer-name').value,
-        phone: document.getElementById('customer-phone').value,
-        address: document.getElementById('customer-address').value,
-        orderDetails: formatOrderForSheet(),
-        totalPrice: document.getElementById('cart-total').innerText,
-        note: document.getElementById('customer-note').value,
-        billLink: "" // Tạm thời để trống phần ảnh bill
-    };
+            // ĐÂY LÀ KHỐI DỮ LIỆU SẼ GỬI ĐẾN GOOGLE SHEET
+            const orderData = {
+                name: document.getElementById('customer-name').value,
+                phone: document.getElementById('customer-phone').value,
+                address: document.getElementById('customer-address').value,
+                orderDetails: formatOrderForSheet(),
+                totalPrice: document.getElementById('cart-total').innerText,
+                note: document.getElementById('customer-note').value,
+                billLink: "" // Tạm thời chưa code gửi file qua Sheet nên để trống
+            };
 
-    // =========================================================
-    // DÁN LINK GOOGLE APP SCRIPT CỦA BẠN VÀO TRONG DẤU NGOẶC KÉP
-    // =========================================================
-    const API_URL = "https://script.google.com/macros/s/AKfycbxBWTtU-ECub9eLchWPi052phXjLbQzuQuwkYaSVrD4HttzFRJr73AIOL2z4awz5oHnRg/exec"; 
+            // =========================================================
+            // CHÚ Ý: BẠN HÃY DÁN ĐƯỜNG LINK MỚI TẠO Ở BƯỚC 1 VÀO ĐÂY NHÉ
+            // =========================================================
+            const API_URL = "https://script.google.com/macros/s/AKfycbxBWTtU-ECub9eLchWPi052phXjLbQzuQuwkYaSVrD4HttzFRJr73AIOL2z4awz5oHnRg/exec"; 
 
-    // Bắt đầu gửi dữ liệu
-    fetch(API_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'text/plain;charset=utf-8',
-        },
-        body: JSON.stringify(orderData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.status === 'success') {
-            showSuccess(); // Mở màn hình thành công & bắn pháo hoa
-            cart = [];     // Làm trống giỏ hàng
-            updateCartUI();
-        } else {
-            alert("Có lỗi từ máy chủ, vui lòng thử lại!");
-        }
-    })
-    .catch(error => {
-        console.error("Lỗi:", error);
-        alert("Lỗi mạng! Vui lòng kiểm tra lại kết nối và thử lại.");
-    })
-    .finally(() => {
-        // Khôi phục nút bấm về trạng thái ban đầu
-        btn.innerHTML = originalHTML;
-        btn.disabled = false;
-    });
-}
-
-/* ==============================================
-   MODULE 10: CONFETTI LOGIC (Hệ thống hạt pháo hoa)
-<!-- ... existing code ... -->
-```
-
-
-
-            // MÔ PHỎNG MẠNG INTERNET CHẬM (1.5s)
-            setTimeout(() => {
-                // Thành công
-                const step2 = document.getElementById('step-2');
-                const step3 = document.getElementById('step-3');
-                
-                step2.classList.add('hidden');
-                step3.classList.remove('hidden');
-                step3.classList.add('flex');
-                
-                setTimeout(() => {
-                    step3.classList.remove('opacity-0');
-                    document.getElementById('bottom-bar').style.transform = 'translateY(100%)';
-                    
-                    setTimeout(() => {
-                        document.getElementById('success-icon').classList.remove('scale-0');
-                        document.getElementById('success-icon').classList.add('scale-100', 'transition-transform', 'duration-500', 'ease-out');
-                        
-                        startConfetti(); // Bắn pháo hoa
-                        
-                        setTimeout(() => { document.getElementById('success-title').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-title').classList.add('transition-all', 'duration-500'); }, 200);
-                        setTimeout(() => { document.getElementById('success-desc').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-desc').classList.add('transition-all', 'duration-500'); }, 400);
-                        setTimeout(() => { document.getElementById('success-btn').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-btn').classList.add('transition-all', 'duration-500'); }, 600);
-                    }, 100);
-                }, 50);
-
-                // Reset Data sau khi gửi
-                cart = [];
-                updateCartUI();
-                form.reset();
-                clearBillPreview();
+            // Bắt đầu gửi dữ liệu
+            fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === 'success') {
+                    showSuccess(); // Mở màn hình thành công & bắn pháo hoa
+                    cart = [];     // Làm trống giỏ hàng
+                    updateCartUI();
+                    form.reset();
+                    clearBillPreview();
+                } else {
+                    alert("Có lỗi từ máy chủ: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Lỗi:", error);
+                alert("Lỗi mạng! Vui lòng kiểm tra lại quyền truy cập (Anyone) trên Google Apps Script.");
+            })
+            .finally(() => {
+                // Khôi phục nút bấm về trạng thái ban đầu
                 btn.innerHTML = originalHTML;
                 btn.disabled = false;
-                currentStep = 3;
-            }, 1500);
+            });
+        }
+        
+        function showSuccess() {
+            // Thành công
+            const step2 = document.getElementById('step-2');
+            const step3 = document.getElementById('step-3');
+            
+            step2.classList.add('hidden');
+            step3.classList.remove('hidden');
+            step3.classList.add('flex');
+            
+            setTimeout(() => {
+                step3.classList.remove('opacity-0');
+                document.getElementById('bottom-bar').style.transform = 'translateY(100%)';
+                
+                setTimeout(() => {
+                    document.getElementById('success-icon').classList.remove('scale-0');
+                    document.getElementById('success-icon').classList.add('scale-100', 'transition-transform', 'duration-500', 'ease-out');
+                    
+                    startConfetti(); // Bắn pháo hoa
+                    
+                    setTimeout(() => { document.getElementById('success-title').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-title').classList.add('transition-all', 'duration-500'); }, 200);
+                    setTimeout(() => { document.getElementById('success-desc').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-desc').classList.add('transition-all', 'duration-500'); }, 400);
+                    setTimeout(() => { document.getElementById('success-btn').classList.remove('translate-y-4', 'opacity-0'); document.getElementById('success-btn').classList.add('transition-all', 'duration-500'); }, 600);
+                }, 100);
+            }, 50);
+            
+            currentStep = 3;
         }
 
         function resetToHome() {
